@@ -17,7 +17,7 @@
     block: |
       # ansible managed
       {% for name, ip in host_list.items() %}
-        {%if name != ansible_hostname}
+        {% if name != ansible_hostname %}
           {{ ip }}   {{ name }}    
       {% endfor %}
 
@@ -28,7 +28,7 @@
     block: |
       # ansible managed
       {% for name, ip in host_list.items() %}
-        {%if name != ansible_hostname}
+        {% if name != ansible_hostname %}
           {{ ip }}   {{ name }}     
       {% endfor %}
 
