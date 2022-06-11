@@ -1,2 +1,7 @@
 ---
 # defaults file for role_gpu_node
+#exmaple host list
+# host_list:
+#   host1: 192.168.0.1
+#   host2: 192.168.0.2
+

@@ -1,6 +1,5 @@
 ---
 # tasks file for role_gpu_node
-
 - name: Check OS version and family
   ansible.builtin.fail:
     msg: "This role can only be run against Ubuntu 20. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
@@ -10,7 +9,42 @@
   ansible.builtin.debug:
     msg: "PASS | This role can only be executed on Ubuntu 20 operating systems, detected {{ ansible_distribution }} {{ ansible_distribution_major_version }}"
   when: (ansible_distribution|lower == 'ubuntu' and ansible_distribution_major_version is version_compare('20', '=='))
-# /etc/cloud/templates/hosts.debian.tmpl
-# /etc/hosts
-# install libtiff-dev ghostscript ghostscript cmake --yes
-#
+
+- name: "Change hosts.debian.tmpl file."
+  ansible.builtin.blockinfile:
+    path: /etc/cloud/templates/hosts.debian.tmpl
+    insertafter: "127.0.0.1 localhost"
+    block: |
+      # ansible managed
+      {% for name, ip in host_list.items() %}
+      {{ ip }}   {{ name }}    
+      {% endfor %}
+
+- name: "Change /etc/hosts file."
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    insertafter: "127.0.0.1 localhost"
+    block: |
+      # ansible managed
+      {% for name, ip in host_list.items() %}
+      {{ ip }}   {{ name }}    
+      {% endfor %}
+
+- name: "Install neeeded packages."
+  ansible.builtin.apt:
+    name:
+      - libtiff-dev
+      - ghostscript
+      - cmake
+    state: present
+
+- name: "Remove unattended upgrades."
+  ansible.builtin.apt:
+    name: unattended-upgrades
+    state: absent
+
+- name: "Disable cloud-init network configuration."
+  ansible.builtin.lineinfile:
+    path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+    line: "network: {config: disabled}"
+    state: present
