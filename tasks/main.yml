@@ -15,10 +15,9 @@
     path: /etc/cloud/templates/hosts.debian.tmpl
     insertafter: "127.0.0.1 localhost"
     block: |
-      # ansible managed
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-          {{ ip }}   {{ name }}
+        {{ ip }}   {{ name }}
         {% endif %}  
       {% endfor %}
 
@@ -27,10 +26,9 @@
     path: /etc/hosts
     insertafter: "127.0.0.1 localhost"
     block: |
-      # ansible managed
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-          {{ ip }}   {{ name }}
+        {{ ip }}   {{ name }}
         {% endif %}   
       {% endfor %}
 
@@ -52,3 +50,4 @@
     path: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
     line: "network: {config: disabled}"
     state: present
+    create: yes
