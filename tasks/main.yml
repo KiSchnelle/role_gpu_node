@@ -17,7 +17,7 @@
     block: |
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-        {{ ip }}   {{ name }}
+      {{ ip }}   {{ name }}
         {% endif %}  
       {% endfor %}
 
@@ -28,7 +28,7 @@
     block: |
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-        {{ ip }}   {{ name }}
+      {{ ip }}   {{ name }}
         {% endif %}   
       {% endfor %}
 
