@@ -18,7 +18,8 @@
       # ansible managed
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-          {{ ip }}   {{ name }}    
+          {{ ip }}   {{ name }}
+        {% endif %}  
       {% endfor %}
 
 - name: "Change /etc/hosts file."
@@ -29,7 +30,8 @@
       # ansible managed
       {% for name, ip in host_list.items() %}
         {% if name != ansible_hostname %}
-          {{ ip }}   {{ name }}     
+          {{ ip }}   {{ name }}
+        {% endif %}   
       {% endfor %}
 
 - name: "Install neeeded packages."
