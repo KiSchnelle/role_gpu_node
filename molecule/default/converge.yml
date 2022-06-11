@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include acme.role_gpu_node"
+      include_role:
+        name: "acme.role_gpu_node"
