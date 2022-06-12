@@ -53,6 +53,21 @@
     state: present
     create: yes
 
+- name: Remove usb0 device from netplan.
+  ansible.builtin.blockinfile:
+    path: /etc/netplan/50-cloud-init.yaml
+    block: |
+      usb0:
+        match:
+          macaddress: 00:00:00:00:00:00
+        mtu: 1500
+        set-name: usb0
+    state: absent
+
+- name: Apply netplan.
+  ansible.builtin.shell:
+    cmd: netplan apply
+
 - name: Setup permissions for ssd cache.
   ansible.builtin.file:
     path: /ssd_cache
