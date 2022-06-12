@@ -59,3 +59,13 @@
     owner: "{{ ssd_cache_owner }}"
     group: "{{ ssd_cache_group }}"
     mode: "0777"
+
+- name: Disable hibernate.
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    masked: yes
+  with_items:
+    - sleep.target
+    - suspend.target
+    - hibernate.target
+    - hybrid-sleep.target
