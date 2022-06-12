@@ -4,4 +4,6 @@
 # host_list:
 #   host1: 192.168.0.1
 #   host2: 192.168.0.2
+# ssd_cache_owner:
+# ssd_cache_group:
 

@@ -51,3 +51,11 @@
     line: "network: {config: disabled}"
     state: present
     create: yes
+
+- name: Setup permissions for ssd cache.
+  ansible.builtin.file:
+    path: /ssd_cache
+    state: directory
+    owner: "{{ ssd_cache_owner }}"
+    group: "{{ ssd_cache_group }}"
+    mode: "0777"
