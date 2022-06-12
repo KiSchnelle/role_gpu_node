@@ -39,6 +39,7 @@
       - ghostscript
       - cmake
     state: present
+  retries: 3
 
 - name: "Remove unattended upgrades."
   ansible.builtin.apt:
